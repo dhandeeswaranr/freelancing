@@ -1,0 +1,49 @@
+
+
+
+
+<section class="row">
+    <div class="col-md-6">
+        <form [formGroup]="ProductForm" (ngSubmit)="submitData()">
+          
+            <mat-form-field class="col-md-12">
+                <input matInput placeholder="Product ID" formControlName="product_ID" [(ngModel)]="currentPID"  >
+            </mat-form-field>
+            <div class="col-md-12">
+                Purchased Date: {{currentPDATE}}
+            </div>
+            <mat-form-field class="col-md-12">
+                
+                <input matInput [matDatepicker]="picker" placeholder="Update Date" formControlName="purchase_Date"  [value]="currentPDATE.value" (dateChange)="addEvent('change', $event)">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            
+            <mat-form-field class="col-md-12">
+                <input matInput placeholder="Product Name" formControlName="product_Name" [(ngModel)]="currentPNAME">
+            </mat-form-field>
+            <mat-form-field class="col-md-12">
+                <input matInput placeholder="Product Quantity" formControlName="product_Quantity" [(ngModel)]="currentPQUAN">
+            </mat-form-field>
+            <mat-form-field class="col-md-12">
+                <input matInput placeholder="Product Price Per Item" formControlName="product_Price" [(ngModel)]="currentPPRICE">
+            </mat-form-field>
+            <mat-form-field class="col-md-12">
+                <input matInput placeholder="GST" formControlName="product_GST" [(ngModel)]="currentPGST">
+            </mat-form-field>
+            <mat-form-field class="col-md-12">
+                <input matInput placeholder="Total" formControlName="product_Total" [(ngModel)]="currentPTOT">
+            </mat-form-field>
+            <button mat-button color="primary" type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <mat-card>
+            <div>
+                    <span>key Code: {{keyCode}}</span><br>
+                    <span>UID: {{currentUID}}</span>
+            </div>
+        </mat-card>
+    </div>
+  </section>

@@ -1,0 +1,34 @@
+<section class="row" >
+  <div class="col-md-6">
+      <form [formGroup]="ProductForm" (ngSubmit)="submitData()">
+         <div class="col-md-12">
+          UID: {{UID}}
+         </div>
+          <mat-form-field class="col-md-12">
+              <input matInput placeholder="Product ID" formControlName="product_ID" value="">
+          </mat-form-field>
+          <mat-form-field class="col-md-12">
+              <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="purchase_Date" [(ngModel)]="PurDate"   (dateChange)="addEvent('change', $event)">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
+          <mat-form-field class="col-md-12">
+              <input matInput placeholder="Product Name" formControlName="product_Name" value="">
+          </mat-form-field>
+          <mat-form-field class="col-md-12">
+              <input matInput placeholder="Product Quantity" formControlName="product_Quantity" value="">
+          </mat-form-field>
+          <mat-form-field class="col-md-12">
+              <input matInput placeholder="Product Price Per Item" formControlName="product_Price" value="">
+          </mat-form-field>
+          <mat-form-field class="col-md-12">
+              <input matInput placeholder="GST" formControlName="product_GST" value="">
+          </mat-form-field>
+          <mat-form-field class="col-md-12">
+              <input matInput placeholder="Total" formControlName="product_Total" value="">
+          </mat-form-field>
+          <button mat-button color="primary" type="submit">Submit</button>
+      </form>
+  </div>
+</section>
