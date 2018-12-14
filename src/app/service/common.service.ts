@@ -8,7 +8,8 @@ export class CommonService {
 
   constructor(private firebase:AngularFireDatabase) { }
   stock:AngularFireList<any>;
-billerModel:AngularFireList<any>;
+ billerModel:AngularFireList<any>;
+  billprint:AngularFireList<any>;
 
 stockForm = new FormGroup({
   $key:new FormControl(null),
@@ -68,4 +69,43 @@ this.stock.remove($key);
  
  
 }
+// bill
+
+billForm = new FormGroup({
+  $key:new FormControl(null),
+  BID:new FormControl(''),
+  bill_Date:new FormControl(''),
+ /* purchase_Date:new FormControl(''),
+  product_ID:new FormControl(''),
+  product_Name:new FormControl(''),
+  product_Quantity:new FormControl(''),
+  product_Price:new FormControl(''),
+  product_Total:new FormControl('')*/
+  
+})
+getBillData(){
+  this.billprint = this.firebase.list('billArray');
+  return this.billprint.snapshotChanges();
+}
+postBillData(billData){
+  
+ console.log("Bill Data" +billData.BID)
+  /*this.stock.push({
+    stockUID:productData.product_UID,
+    productGST:productData.product_GST,
+    purchaseDate:productData.purchase_Date,
+    productName:productData.product_Name,
+    productId:productData.product_ID,
+    productQunatity:productData.product_Quantity,
+    productPrice:parseInt(productData.product_Price),
+    totalPrice:productData.product_Total
+    
+  })*/
+  this.billprint.push({
+   /* BID:"dad",
+    bill_Date:"dadas"*/
+    billData
+  });
+}
+
 }
