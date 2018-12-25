@@ -13,12 +13,14 @@
   </div>
   <div class="col-md-6">
     <mat-icon class="functionIcon"  matTooltip="Add Item" (click)="addRow()">add</mat-icon>
+    <mat-icon class="functionIcon"  matTooltip="Reset">cached</mat-icon>
+    <button mat-button  class="submit" (click)="bill(formBilling.value)"> Billing </button>
   </div>
 </div>
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12" >
    <form [formGroup]="formBilling" (ngSubmit)="bill(formBilling.value)" name="formBilling">
-    <button mat-button type="submit" class="submit">Ready to Billing...</button>
+    <!-- <button mat-button type="submit" class="submit">Ready to Billing...</button> -->
     <table mat-table [dataSource]="dataSource" class="col-md-12 col-sm-12 col-xs-12" formArrayName="billArray">
       
       <!--- Note that these columns can be defined in any order.

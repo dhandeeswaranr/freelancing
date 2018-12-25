@@ -6,14 +6,28 @@
 
 <div class="container-fluid">
   <div class="row">  
-    <div class="col-md-12">
-        <div class="right">
-            <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item routerLink="">Home</button>
-              <button mat-menu-item routerLink="/stock" >Stock Entry</button>
-              <button mat-menu-item routerLink="/bill">Billing</button>
-            </mat-menu>
+    <div class="col-md-12 nav-container">
+       
+        
+        <div class="row">
+          <div class="col-md-6">
+             <span class="menu-title">Billing APP</span>
+          </div>
+          <div class="col-md-6">
+              <div class="right">
+                  <button mat-button [matMenuTriggerFor]="menu" class="menu-title">
+                      <mat-icon matTooltip="Menu">fingerprint</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item routerLink="">Home</button>
+                    <button mat-menu-item routerLink="/stock" >Stock Entry</button>
+                    <button mat-menu-item routerLink="/bill">Billing</button>
+                  </mat-menu>
+              </div>
+              <div class="right">
+                  <mat-icon matTooltip="Dashboard" class="dashboard">dashboard</mat-icon>
+              </div>
+            </div>
         </div>
     </div>
   </div>

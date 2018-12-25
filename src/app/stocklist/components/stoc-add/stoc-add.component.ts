@@ -15,6 +15,11 @@ export class StocAddComponent implements OnInit {
   purchaseDate:Date;
   events: string[] = [];
   PurDate:any;
+  defaultQuantity:number = 0;
+  defaultPrice:number = 0;
+  defaultGST:number = 0;
+  totalPrice:number = 0;
+
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     this.events.push(`${type}: ${event.value}`);
@@ -44,6 +49,7 @@ export class StocAddComponent implements OnInit {
     this.UID =  Math.floor(1000 + Math.random() * 9000);
   }
 
+
   submitData(){
     
     this.ProductForm.value.product_UID = this.UID;
@@ -51,8 +57,26 @@ export class StocAddComponent implements OnInit {
    //this.ProductForm.value.purchase_Date = this.PurDate;
     console.log("date" + this.ProductForm.value.purchase_Date);
     this.commonService.postStockData(this.ProductForm.value);
-this.ProductForm.reset();
+    this.ProductForm.reset();
 
   }
 
+  getQuantity(event){
+    console.log("Quantity" +event.target.value)
+    this.defaultQuantity = parseInt(event.target.value) ;
+   // this.totalPrice = this.defaultQuantity * this.defaultPrice
+    //this.ProductForm.value.product_Total =  this.totalPrice
+    this.totalPrice = ((this.defaultQuantity * this.defaultPrice) * (this.defaultGST/100)) + (this.defaultQuantity * this.defaultPrice) 
+  }
+  getProducPrice(event){
+    console.log("Price" +event.target.value)
+    this.defaultPrice = parseInt(event.target.value)
+   // this.totalPrice = this.defaultQuantity * this.defaultPrice
+   this.totalPrice = ((this.defaultQuantity * this.defaultPrice) * (this.defaultGST/100)) + (this.defaultQuantity * this.defaultPrice) 
+   // this.ProductForm.value.product_Total =  this.totalPrice
+  }
+  getGST(event){
+    this.defaultGST = parseInt(event.target.value);
+    this.totalPrice = ((this.defaultQuantity * this.defaultPrice) * (this.defaultGST/100)) + (this.defaultQuantity * this.defaultPrice) 
+  }
 }

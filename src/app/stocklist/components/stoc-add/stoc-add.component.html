@@ -14,21 +14,23 @@
           </mat-form-field>
           
           <mat-form-field class="col-md-12">
-              <input matInput placeholder="Product Name" formControlName="product_Name" value="">
+              <input matInput placeholder="Product Name" formControlName="product_Name" value="" >
           </mat-form-field>
           <mat-form-field class="col-md-12">
-              <input matInput placeholder="Product Quantity" formControlName="product_Quantity" value="">
+              <input matInput placeholder="Product Quantity" formControlName="product_Quantity" value="" (change)="getQuantity($event)">
           </mat-form-field>
           <mat-form-field class="col-md-12">
-              <input matInput placeholder="Product Price Per Item" formControlName="product_Price" value="">
+              <input matInput placeholder="Product Price Per Item" formControlName="product_Price" value="" (change)="getProducPrice($event)">
           </mat-form-field>
           <mat-form-field class="col-md-12">
-              <input matInput placeholder="GST" formControlName="product_GST" value="">
+              <input matInput placeholder="GST" formControlName="product_GST" value="" (change)="getGST($event)">
           </mat-form-field>
           <mat-form-field class="col-md-12">
-              <input matInput placeholder="Total" formControlName="product_Total" value="">
+              <input matInput placeholder="Total" formControlName="product_Total" value="" [(ngModel)] = "totalPrice">
           </mat-form-field>
           <button mat-button color="primary" type="submit">Submit</button>
       </form>
   </div>
 </section>
+
+{{ProductForm.value | json}}

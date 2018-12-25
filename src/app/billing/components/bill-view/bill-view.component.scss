@@ -26,9 +26,10 @@ tr{
     } 
 }
 .functionIcon{
- font-size: 50px;
+ font-size: 32px;
  margin-left: 25px;
  margin-top: 50px;
+ cursor: pointer;
 }
 
 .tag{
@@ -37,7 +38,13 @@ tr{
    margin-bottom: 15px;
 }
 .submit{
-    margin-bottom: 15px;
+   // margin-bottom: 15px;
     background: $icon-Color;
     color: #fff;
+    margin-left: 15px;
+    position: relative;
+    top:-11px;
+}
+.mat-card{
+    padding: 5px;
 }
