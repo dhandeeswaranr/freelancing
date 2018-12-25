@@ -1,0 +1,19 @@
+.land-background{
+    background-image: url('../../assets/images/airport.jpg');
+    height: 750px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.gridFace{
+    height: 375px;
+    border:1px solid grey;
+    div{
+        text-align: center;
+        margin-top: 50px;
+    }
+}
+.gridFace:hover{
+    background: grey;
+    opacity: 0.8;
+   // background-image: url('../../assets/images/airport.jpg');
+}

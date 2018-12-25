@@ -62,6 +62,8 @@ updateStock($key,cUID, CPDATA, productData){
   })
 }
 
+
+
 stockRemove($key:any){
   // this.delid = productData;
    console.log("del sev " +$key.toString());
@@ -75,6 +77,7 @@ billForm = new FormGroup({
   $key:new FormControl(null),
   BID:new FormControl(''),
   bill_Date:new FormControl(''),
+  BillValueTotal:new FormControl('')
  /* purchase_Date:new FormControl(''),
   product_ID:new FormControl(''),
   product_Name:new FormControl(''),
@@ -87,7 +90,7 @@ getBillData(){
   this.billprint = this.firebase.list('billArray');
   return this.billprint.snapshotChanges();
 }
-postBillData(billData){
+postBillData(billData, total){
   
  console.log("Bill Data" +billData.BID)
   /*this.stock.push({
@@ -104,8 +107,16 @@ postBillData(billData){
   this.billprint.push({
    /* BID:"dad",
     bill_Date:"dadas"*/
-    billData
+    billData,
+    BillValueTotal:total
   });
 }
 
+updateStockBill(key, QuanDetail){
+  console.log("servic" +key, QuanDetail)
+  this.stock.update(key, {
+    productQunatity:QuanDetail.productQunatity
+  })
+  
+}
 }

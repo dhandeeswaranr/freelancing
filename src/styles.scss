@@ -2,8 +2,13 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
 //@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+//variables
+$table-Header-Color:#49c5b6;
+$icon-Color:#31708e;
+//
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: gainsboro; }
 .left{
     float: left;
 }
@@ -17,6 +22,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .mat-icon{
-    color:darkgoldenrod;
+    color:$icon-Color;
 }
+
 

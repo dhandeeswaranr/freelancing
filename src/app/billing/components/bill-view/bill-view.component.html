@@ -1,19 +1,25 @@
 <div class="row">
-  <div class="col-md-6"></div>
   <div class="col-md-6">
-    <mat-card>
-      <label>BID : {{BID}}</label><br>
-      <label>Date: {{ whatTime | async | date:'d/M/yy hh:mm:ss' }}</label><br>
-      <label>Contact</label><br>
-    </mat-card>
+    <div>
+      
+      <mat-card class="tag">
+        <label>BID : {{BID}}</label><br>
+        <label>Date: {{ currentDate }}</label><br>
+        <label>Contact :</label><br>
+      </mat-card>
+
+
+    </div>
+  </div>
+  <div class="col-md-6">
+    <mat-icon class="functionIcon"  matTooltip="Add Item" (click)="addRow()">add</mat-icon>
   </div>
 </div>
-<button (click)="addRow()">Add</button>
 <div class="row">
-  <div class="col-md-12 col-sm-12" >
-   <form [formGroup]="formBilling" (ngSubmit)="bill(formBilling)" name="formBilling">
-    <button type="submit">submit</button>
-    <table mat-table [dataSource]="dataSource" class="col-md-12" formArrayName="billArray">
+  <div class="col-md-12 col-sm-12 col-xs-12" >
+   <form [formGroup]="formBilling" (ngSubmit)="bill(formBilling.value)" name="formBilling">
+    <button mat-button type="submit" class="submit">Ready to Billing...</button>
+    <table mat-table [dataSource]="dataSource" class="col-md-12 col-sm-12 col-xs-12" formArrayName="billArray">
       
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
@@ -21,13 +27,23 @@
       <!-- Position Column -->
       <ng-container matColumnDef="Index" >
         <th mat-header-cell *matHeaderCellDef>#</th>
-        <td mat-cell *matCellDef="let element;"> </td>
+        <td mat-cell *matCellDef="let element; let index = index"> {{index+1}} </td>
         <td mat-footer-cell *matFooterCellDef> Total ₹ </td>
       </ng-container> 
        <ng-container matColumnDef="productID">
             <th mat-header-cell *matHeaderCellDef>Product ID</th>
-            <td mat-cell *matCellDef="let element; let index = index" [formGroupName]="index">
-              <input type="text"  name="productID" formControlName="productID">
+            <td mat-cell *matCellDef="let element; let index = index" [formGroupName]="index" >
+              <!-- <input type="text"  name="productID" formControlName="productID"> [formControl]="productIDs[index]"-->
+              
+              <mat-form-field class="example-full-width">
+                <input type="text" placeholder="Pick one" matInput  formControlName="productID"  name="productID" [matAutocomplete]="auto" required>
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of stockData" [value]="option.productId">
+                    {{option.productId}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
                </td>
             <td mat-footer-cell *matFooterCellDef>  </td>
           </ng-container>
@@ -36,18 +52,43 @@
       
       <ng-container matColumnDef="stockName">
         <th mat-header-cell *matHeaderCellDef>Product Name</th>
-        <td mat-cell *matCellDef="let element; let index = index" [formGroupName]="index"><input type="text"  name="stockName" formControlName="stockName"> </td>
+        <td mat-cell *matCellDef="let element; let index = index" [formGroupName]="index">
+          <!-- <input type="text"  name="stockName" formControlName="stockName">  -->
+          <mat-form-field class="example-full-width">
+              <input type="text" placeholder="Pick one" matInput  formControlName="productName"  name="productName" [matAutocomplete]="auto" required>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="GetProductDetails($event)" >
+                <mat-option *ngFor="let option of stockData" [value]="option.productName">
+                  {{option.productName}} 
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <!-- <mat-form-field>
+              <select matNativeControl formControlName="productName"  name="productName" (change)="GetProductDetails($event)" required>
+                <optgroup label="" *ngFor="let option of stockData">
+                  <option [value]="option.productName ">{{option.productName}}</option>
+                  
+                </optgroup>
+              </select> 
+            </mat-form-field> -->
+           <!-- <mat-form-field>
+                <mat-select placeholder="Favorite food" formControlName="productName"  name="productName" (ngModelChange)="GetProductDetails($event, option.$Key)">
+                  <mat-option *ngFor="let option of stockData" [value]="option.productName"  (ngModelChange)="GetProductDetails($event, option.$Key)">
+                      {{option.productName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field> -->
+        </td>
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
       <ng-container matColumnDef="stockQuan">
         <th mat-header-cell *matHeaderCellDef>Quantity</th>
-        <td mat-cell *matCellDef="let element; let index = index" [formGroupName]="index"><input type="text" name="stockQuan" formControlName="stockQuan">  </td>
+        <td mat-cell *matCellDef="let element; let index = index" [formGroupName]="index"><input type="text" name="stockQuan" formControlName="stockQuan"  required (change)="quantity(formBilling.value)">  </td>
         <td mat-footer-cell *matFooterCellDef>  </td>
       </ng-container>
       <ng-container matColumnDef="stockPrice">
         <th mat-header-cell *matHeaderCellDef>Price Per Product</th>
-        <td mat-cell *matCellDef="let element; let index = index" [formGroupName]="index"><input type="text" name="stockPrice" formControlName="stockPrice"></td>
-        <td mat-footer-cell *matFooterCellDef>getTotalCost  </td>
+        <td mat-cell *matCellDef="let element; let index = index" [formGroupName]="index"><input type="text" name="stockPrice" formControlName="stockPrice" required (change)="price(formBilling.value)"></td>
+        <td mat-footer-cell *matFooterCellDef>TOTAL {{BillTot}} + GST 18%  {{GstTot}}</td>
       </ng-container>
       <ng-container matColumnDef="stockGST">
           <th mat-header-cell *matHeaderCellDef>GST</th>
@@ -57,8 +98,13 @@
 
       <ng-container matColumnDef="stockTotal">
         <th mat-header-cell *matHeaderCellDef>Total</th>
-        <td mat-cell *matCellDef="let element let index = index" [formGroupName]="index">  </td>
-        <td mat-footer-cell *matFooterCellDef> </td>
+        <td mat-cell *matCellDef="let element let index = index" [formGroupName]="index"> 
+         <!--{{TotalPrice}}   --> 
+          <input type="text" name="ItemTotalPrice"  [(ngModel)]="TotalPrice[index]" formControlName="ItemTotalPrice" readonly>
+        </td>
+        <td mat-footer-cell *matFooterCellDef>
+            <!-- <input type="text" name="billTotal" formControlName="billTotal"> -->
+          {{ getTotalCost()}} </td>
       </ng-container>
       <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef></th>
@@ -87,3 +133,5 @@
   </form>
   </div>
 </div>
+
+test {{formBilling.valid}}

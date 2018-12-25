@@ -1,0 +1,43 @@
+// variables
+$table-Header-Color:#49c5b6;
+$table-Text-Color:#f7f9fb;
+$icon-Color:#31708e;
+$line-Color:#687864;
+$table-Background:#f7f9fb;
+//
+
+/* table Style */
+    .mat-header-cell{
+    background: $table-Header-Color;
+    color:$table-Text-Color;
+    font-size: 14px;
+    }
+    .mat-row {
+        border-bottom:1.5px solid $line-Color;
+    }
+    table{
+        background: $table-Background;
+    }
+//
+
+tr{
+    input{
+        border:none;
+    } 
+}
+.functionIcon{
+ font-size: 50px;
+ margin-left: 25px;
+ margin-top: 50px;
+}
+
+.tag{
+   background: $table-Header-Color; 
+   color:$table-Text-Color;
+   margin-bottom: 15px;
+}
+.submit{
+    margin-bottom: 15px;
+    background: $icon-Color;
+    color: #fff;
+}
