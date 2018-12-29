@@ -12,6 +12,7 @@ import { StocAddComponent } from './components/stoc-add/stoc-add.component';
 import {ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { StockUpdateComponent } from './components/stock-update/stock-update.component';
 import {CommunicationService } from '../service/communication.service';
+import {DownloadExcelService } from '../excelDownloadService/download-excel.service'
 const ROUTES: Routes = [
   {
     path:'',
@@ -37,7 +38,7 @@ const ROUTES: Routes = [
     StocAddComponent,
     //ROUTES
   ],
-  providers:[CommonService, CommunicationService],
+  providers:[CommonService, CommunicationService, DownloadExcelService],
   entryComponents:[StocAddComponent, StockUpdateComponent]
 })
 export class StocklistModule { }

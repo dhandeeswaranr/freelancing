@@ -11,7 +11,16 @@
 }
 .dashboard{
     margin-top: 5px;
+    margin-right: 5px;
+
 }
+
+
+button:focus{
+    outline: 0px auto -webkit-focus-ring-color;
+
+}
+
 /deep/ .mat-menu-panel{
     background: #31708e;
     color: #fff;  

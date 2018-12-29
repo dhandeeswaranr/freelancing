@@ -156,6 +156,7 @@ export class BillViewComponent implements OnInit {
    
   
   this.service.postBillData(this.formBilling.value, this.GstPlusTot)
+  this.print();
   }
   //
   updateView() {
@@ -282,6 +283,31 @@ pricePerItem:number;
         }*/
         
         
+    }
+    print(): void {
+      let printContents, popupWin;
+      printContents = document.getElementById('print-section').innerHTML;
+      popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+      popupWin.document.open();
+      popupWin.document.write(`
+        <html>
+          <head>
+            <title>Print tab</title>
+            <style>
+            //........Customized style.......
+            </style>
+          </head>
+      <body onload="window.print();window.close()">${printContents}</body>
+        </html>`
+      );
+      popupWin.document.close();
+    }
+
+    reset(){
+      this.formBilling.reset();
+      this.BID =  Math.floor(10000 + Math.random() * 9000);
+      this.currentDate = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
+
     }
 
 /** End of Class **/    

@@ -13,15 +13,15 @@
   </div>
   <div class="col-md-6">
     <mat-icon class="functionIcon"  matTooltip="Add Item" (click)="addRow()">add</mat-icon>
-    <mat-icon class="functionIcon"  matTooltip="Reset">cached</mat-icon>
-    <button mat-button  class="submit" (click)="bill(formBilling.value)"> Billing </button>
+    <mat-icon class="functionIcon"  matTooltip="Reset" (click)="reset()">cached</mat-icon>
+    <button mat-button  class="submit" (click)="bill(formBilling.value)" routerLink=""> Billing </button>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-12 col-sm-12 col-xs-12" >
+  <div class="col-md-12 col-sm-12 col-12" >
    <form [formGroup]="formBilling" (ngSubmit)="bill(formBilling.value)" name="formBilling">
     <!-- <button mat-button type="submit" class="submit">Ready to Billing...</button> -->
-    <table mat-table [dataSource]="dataSource" class="col-md-12 col-sm-12 col-xs-12" formArrayName="billArray">
+    <table mat-table [dataSource]="dataSource" class="col-md-12 col-sm-12 col-12" formArrayName="billArray">
       
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
@@ -137,3 +137,52 @@
 </div>
 
 test {{formBilling.valid}}
+
+{{formBilling.value | json}}
+{{formBilling.value.billArray?.length | json}}
+<div *ngFor="let data of formBilling.value.billArray">
+  <div>Item {{data.productName}}</div>
+</div>
+
+<section id="print-section" [hidden]="true">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="text-center">
+          Company Name
+      </div>
+      <div>
+       <span>Bill Number : {{BID}}</span> <br>
+       <span>Date        : {{currentDate}} </span>   
+      </div>
+      <table class="col-md-12 col-12">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Items</th>
+            <th>Quan</th>
+            <th>price</th>
+            <th>total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of formBilling.value.billArray; let i = index;">
+            <td>{{i + 1}}</td>
+            <td>{{data.productName}}</td>
+            <td>{{data.stockQuan}}</td>
+            <td>{{data.stockPrice}}</td>
+            <td>{{data.ItemTotalPrice}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <span>GST(18%) : {{GstTot}}</span><br>
+        <span>Item Total: {{BillTot}}</span><br>
+        <span>Total : {{getTotalCost()}}</span><br>
+
+        
+
+
+      </div>
+    </div>
+  </div>
+</section>

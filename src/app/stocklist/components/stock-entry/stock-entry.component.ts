@@ -3,11 +3,12 @@ import {MatPaginator, MatSort, MatTableDataSource, MatDialog} from '@angular/mat
 import { CommonService} from '../../../service/common.service';
 import { StocAddComponent } from '../stoc-add/stoc-add.component';
 import {CommunicationService } from '../../../service/communication.service';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { Subject } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { StockUpdateComponent } from '../stock-update/stock-update.component';
 import { angularMath } from 'angular-ts-math';
+import { DownloadExcelService} from '../../../excelDownloadService/download-excel.service'
 @Component({
   selector: 'stock-entry',
   templateUrl: './stock-entry.component.html',
@@ -27,7 +28,8 @@ export class StockEntryComponent implements OnInit {
   dataSource :MatTableDataSource<any>;
   displayedColumns: string[] = ['Index', 'UID', 'Date', 'productID', 'stockName', 'stockQuan', 'stockPrice','stockGST', 'stockTotal', 'actions'];
   pageLength:any;
-  constructor(private service:CommonService, public dialog: MatDialog, private commService:CommunicationService) { 
+
+constructor(private service:CommonService, public dialog: MatDialog, private commService:CommunicationService, private excelService:DownloadExcelService) { 
     
   }
 
@@ -125,6 +127,31 @@ export class StockEntryComponent implements OnInit {
   
       return this.stockData.map(t => t.productPrice).reduce((acc, value) => acc + value, 0);
     }
+
+    downloadExcelFile(){
+      this.excelService.exportAsExcelFile(this.stockData, 'sample');
+    }
+
+    print(): void {
+      let printContents, popupWin;
+      printContents = document.getElementById('print-section').innerHTML;
+      popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+      popupWin.document.open();
+      popupWin.document.write(`
+        <html>
+          <head>
+            <title>Print tab</title>
+            <style>
+            //........Customized style.......
+            </style>
+          </head>
+      <body onload="window.print();window.close()">${printContents}</body>
+        </html>`
+      );
+      popupWin.document.close();
+    }
+    }
+
     
 }
 export interface tableHeader{

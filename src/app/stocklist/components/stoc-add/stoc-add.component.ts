@@ -19,6 +19,7 @@ export class StocAddComponent implements OnInit {
   defaultPrice:number = 0;
   defaultGST:number = 0;
   totalPrice:number = 0;
+  totalQuantityAvailable:number;
 
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
@@ -39,7 +40,8 @@ export class StocAddComponent implements OnInit {
       product_Name:[null,],
       product_Quantity:[0,],
       product_Price:[0,],
-      product_Total:[null,]
+      product_Total:[null,],
+      product_Available_Quantity:[0]
   
     })
   }
@@ -54,6 +56,8 @@ export class StocAddComponent implements OnInit {
     
     this.ProductForm.value.product_UID = this.UID;
     this.ProductForm.value.purchase_Date = this.purchaseDate.toDateString();
+    this.ProductForm.value.product_Available_Quantity = this.totalQuantityAvailable;
+   //this.ProductForm.controls('product_Available_Quantity').value = 0;
    //this.ProductForm.value.purchase_Date = this.PurDate;
     console.log("date" + this.ProductForm.value.purchase_Date);
     this.commonService.postStockData(this.ProductForm.value);
@@ -66,6 +70,9 @@ export class StocAddComponent implements OnInit {
     this.defaultQuantity = parseInt(event.target.value) ;
    // this.totalPrice = this.defaultQuantity * this.defaultPrice
     //this.ProductForm.value.product_Total =  this.totalPrice
+    this.totalQuantityAvailable = event.target.value;
+    this.ProductForm.value.product_Available_Quantity = this.totalQuantityAvailable;
+    console.log("_total" +this.ProductForm.value.product_Available_Quantity)
     this.totalPrice = ((this.defaultQuantity * this.defaultPrice) * (this.defaultGST/100)) + (this.defaultQuantity * this.defaultPrice) 
   }
   getProducPrice(event){

@@ -20,7 +20,8 @@ stockForm = new FormGroup({
   product_Name:new FormControl(''),
   product_Quantity:new FormControl(''),
   product_Price:new FormControl(''),
-  product_Total:new FormControl('')
+  product_Total:new FormControl(''),
+  product_Available_Quantity:new FormControl(''),
   
 })
 
@@ -32,6 +33,7 @@ getStockData(){
 
 postStockData(productData){
   console.log("ser Data" +productData.totalPrice)
+  console.log("service Data" +productData)
   this.stock.push({
     stockUID:productData.product_UID,
     productGST:productData.product_GST,
@@ -40,7 +42,9 @@ postStockData(productData){
     productId:productData.product_ID,
     productQunatity:productData.product_Quantity,
     productPrice:parseInt(productData.product_Price),
-    totalPrice:productData.product_Total
+    totalPrice:productData.product_Total,
+    productAvailableQuantity:parseInt(productData.product_Available_Quantity) 
+
     
   })
   

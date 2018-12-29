@@ -8,8 +8,11 @@
                     <mat-icon matTooltip="Add Stock" (click)="openDialog()">add</mat-icon>
                 </div>
                 <div class="left add-icon-top func_Icon">
-                    <mat-icon matTooltip="Download Excel">vertical_align_bottom</mat-icon>
+                    <mat-icon matTooltip="Download Excel" (click)="downloadExcelFile()">vertical_align_bottom</mat-icon>
                 </div>
+                <div class="left add-icon-top func_Icon">
+                  <mat-icon matTooltip="Print" (click)="print()">print</mat-icon>
+              </div>
             </div>
             <div class="col-md-6">
               
@@ -60,7 +63,7 @@
       </ng-container>
       <ng-container matColumnDef="stockQuan">
         <th mat-header-cell *matHeaderCellDef>Quantity</th>
-        <td mat-cell *matCellDef="let element"> {{element.productQunatity}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.productQunatity}} / {{element.productAvailableQuantity}}</td>
         <td mat-footer-cell *matFooterCellDef>  </td>
       </ng-container>
       <ng-container matColumnDef="stockPrice">
