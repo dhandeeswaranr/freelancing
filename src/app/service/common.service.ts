@@ -123,4 +123,12 @@ updateStockBill(key, QuanDetail){
   })
   
 }
+
+billRemove($key:any){
+  // this.delid = productData;
+   console.log("del sev " +$key.toString());
+this.billprint.remove($key);
+ 
+ 
+}
 }

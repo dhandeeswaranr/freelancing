@@ -16,6 +16,8 @@ import {
   MatNativeDateModule,
   MatAutocompleteModule,
   MatMenuModule,
+  MatTabsModule,
+  MatProgressSpinnerModule
    
 
 } from '@angular/material';
@@ -37,7 +39,9 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatAutocompleteModule,
-    MatMenuModule 
+    MatMenuModule,
+    MatTabsModule,
+    MatProgressSpinnerModule 
   ],
   exports:[
     MatListModule,
@@ -54,7 +58,9 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatAutocompleteModule,
-    MatMenuModule 
+    MatMenuModule,
+    MatTabsModule,
+    MatProgressSpinnerModule 
   ]
 })
 export class Material704Module { }

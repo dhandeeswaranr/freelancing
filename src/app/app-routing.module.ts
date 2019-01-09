@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { BillingDetailsViewComponent } from './dashboard/component/billing-details-view/billing-details-view.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,11 @@ const routes: Routes = [
       {
         path:'bill',
         loadChildren:'./billing/billing.module#BillingModule'
+      },
+      {
+        path:'dashboard',
+        loadChildren:'./dashboard/dashboard.module#DashboardModule'
+       
       }
     ]
   }

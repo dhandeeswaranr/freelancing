@@ -157,6 +157,15 @@ export class BillViewComponent implements OnInit {
   
   this.service.postBillData(this.formBilling.value, this.GstPlusTot)
   this.print();
+  setTimeout(()=>{    //<<<---    using ()=> syntax
+   this.formBilling.reset();
+   this.BID =  Math.floor(10000 + Math.random() * 9000);
+    
+    //
+    //this.formValidation();
+    //
+    this.currentDate = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
+    }, 1500);
   }
   //
   updateView() {
